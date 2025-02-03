@@ -159,7 +159,7 @@ import math
 class Point:
     def __init__(self, x=0, y=0):
         if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
-            raise TypeError("x and y must be numeric values.")
+            raise TypeError("x and y must be numeric values.") # verifica que los numeros dados sean numericos
         self._x = x
         self._y = y
 
@@ -168,7 +168,7 @@ class Point:
 
     def set_x(self, value):
         if not isinstance(value, (int, float)):
-            raise TypeError("x must be a numeric value.")
+            raise TypeError("x must be a numeric value.") # verifica que el numero dado sea numerico
         self._x = value
 
     def get_y(self):
@@ -176,18 +176,18 @@ class Point:
 
     def set_y(self, value):
         if not isinstance(value, (int, float)):
-            raise TypeError("y must be a numeric value.")
+            raise TypeError("y must be a numeric value.") # verifica que el numero dado sea numerico
         self._y = value
 
     def compute_distance(self, other):
         if not isinstance(other, Point):
-            raise TypeError("Argument must be a Point instance.")
+            raise TypeError("Argument must be a Point instance.") # verifica que el argumento sea un objeto Point
         return math.sqrt((self._x - other.get_x()) ** 2 + (self._y - other.get_y()) ** 2)
 
 class Line:
     def __init__(self, start, end):
         if not all(isinstance(point, Point) for point in (start, end)):
-            raise TypeError("Start and end must be instances of Point.")
+            raise TypeError("Start and end must be instances of Point.") # verifica que los argumentos sean un objeto Point
         self._start = start
         self._end = end
 
@@ -203,7 +203,7 @@ class Line:
 class Shape:
     def __init__(self, vertices):
         if not all(isinstance(vertex, Point) for vertex in vertices):
-            raise TypeError("Vertices must be instances of Point.")
+            raise TypeError("Vertices must be instances of Point.") # verifica que el argumento sea un objeto Point
         self._vertices = vertices
         self._edges = [Line(vertices[i], vertices[(i + 1) % len(vertices)]) for i in range(len(vertices))]
 
@@ -222,9 +222,9 @@ class Shape:
 class Rectangle(Shape):
     def __init__(self, bottom_left, width, height):
         if not isinstance(width, (int, float)) or not isinstance(height, (int, float)):
-            raise TypeError("Width and height must be numeric values.")
+            raise TypeError("Width and height must be numeric values.") # verifica que los numeros dados sean numericos
         if width <= 0 or height <= 0:
-            raise ValueError("Width and height must be positive values.")
+            raise ValueError("Width and height must be positive values.") # verifica que los numeros dados sean numericos y positivos
         vertices = [
             bottom_left,
             Point(bottom_left.get_x() + width, bottom_left.get_y()),
@@ -240,9 +240,9 @@ class Rectangle(Shape):
 
     def set_width(self, value):
         if not isinstance(value, (int, float)):
-            raise TypeError("Width must be a numeric value.")
+            raise TypeError("Width must be a numeric value.") # verifica que el numero dado sea numerico
         if value <= 0:
-            raise ValueError("Width must be positive.")
+            raise ValueError("Width must be positive.") # verifica que el numero dado sea numerico y positivo
         self._width = value
 
     def get_height(self):
@@ -250,9 +250,9 @@ class Rectangle(Shape):
 
     def set_height(self, value):
         if not isinstance(value, (int, float)):
-            raise TypeError("Height must be a numeric value.")
+            raise TypeError("Height must be a numeric value.") # verifica que el numero dado sea numerico
         if value <= 0:
-            raise ValueError("Height must be positive.")
+            raise ValueError("Height must be positive.") # verifica que el numero dado sea numerico y positivo
         self._height = value
 
     def compute_area(self):
@@ -261,13 +261,13 @@ class Rectangle(Shape):
 class Square(Rectangle):
     def __init__(self, bottom_left, side_length):
         if not isinstance(side_length, (int, float)) or side_length <= 0:
-            raise TypeError("Side length must be a positive numeric value.")
+            raise TypeError("Side length must be a positive numeric value.") # verifica que el numero dado sea numerico o positivo
         super().__init__(bottom_left, side_length, side_length)
 
 class Triangle(Shape):
     def __init__(self, vertices):
         if len(vertices) != 3:
-            raise ValueError("A triangle must have exactly 3 vertices.")
+            raise ValueError("A triangle must have exactly 3 vertices.") # verifica que el objeto Triangle tenga 3 vertices
         super().__init__(vertices)
 
     def compute_area(self):
@@ -280,7 +280,7 @@ class Triangle(Shape):
         bc = b.compute_distance(c)
         ca = c.compute_distance(a)
         if ab + bc <= ca or bc + ca <= ab or ca + ab <= bc:
-            raise ValueError("The vertices do not form a valid triangle.")
+            raise ValueError("The vertices do not form a valid triangle.") # verifica que con los vertices dados se pueda formar la figura
         return ab, bc, ca
 
 class Isosceles(Triangle):
@@ -361,4 +361,5 @@ if __name__ == "__main__":
         print(f"Error: {e}")
     except Exception as e:
         print(f"Unexpected error: {e}")
+
 ```
