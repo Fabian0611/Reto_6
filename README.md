@@ -120,7 +120,7 @@ except Exception as e:
     print(f"Error: {e}")
 ```
 
-# Suma Consecutiva
+### Suma Consecutiva
 Se añade una excepcion ValueError que sucede cuando la longitud de la lista es menor de 2, ademas de un Exception para problemas no identificados o inesperados.
 ```python
 def mayor_suma_consecutiva(lista):
